@@ -75,6 +75,10 @@ public class QueryItem {
 	public void setDestinationCode(String destinationCode) {
 		this.destinationCode = destinationCode;
 	}
+	
+	public List<AvailabilityInfo> getAvailabilityInfo(){
+		return availInfo;
+	}
 
 	public void queryStatus() throws ClientProtocolException, IOException,
 			ParserConfigurationException, SAXException {

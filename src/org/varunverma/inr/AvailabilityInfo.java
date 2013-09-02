@@ -1,5 +1,7 @@
 package org.varunverma.inr;
 
+import org.json.JSONObject;
+
 public class AvailabilityInfo {
 	
 	public String TrainNo, JourneyDate, Class, LookupDate, LookupTime, fromStation, toStation;
@@ -89,6 +91,25 @@ public class AvailabilityInfo {
 			}
 			
 		}
+		
+	}
+
+	public JSONObject jsonify() {
+
+		JSONObject json = new JSONObject();
+		
+		json.put("TrainNo", TrainNo);
+		json.put("JourneyDate", JourneyDate);
+		json.put("JClass", Class);
+		json.put("LookupDate", LookupDate);
+		json.put("FromStations", fromStation);
+		json.put("ToStation", toStation);
+		json.put("GrossAvType", grossAvType);
+		json.put("GrossAvCount", grossAvCount);
+		json.put("NetAvType", netAvType);
+		json.put("NetAvCount", netAvCount);
+		
+		return json;
 		
 	}
 	
