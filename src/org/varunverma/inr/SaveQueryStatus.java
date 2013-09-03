@@ -39,8 +39,10 @@ public class SaveQueryStatus {
 			
 			Iterator<AvailabilityInfo> iterator = i.next().getAvailabilityInfo().iterator();
 			
-			availInfo.put(iterator.next().jsonify());
-
+			while(iterator.hasNext()){
+				availInfo.put(iterator.next().jsonify());
+			}
+			
 		}
 		
 		Application app = Application.getInstance();
@@ -61,8 +63,10 @@ public class SaveQueryStatus {
 		
 		List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
 		
+		String availData = availInfo.toString();
+		nameValuePairs.add(new BasicNameValuePair("avail_data", availData));
+		
 		httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
-		nameValuePairs.add(new BasicNameValuePair("avail_data", availInfo.toString()));
 		
 		//Execute HTTP Post Request 
     	HttpResponse response = httpclient.execute(httppost);

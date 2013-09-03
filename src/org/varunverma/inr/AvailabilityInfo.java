@@ -93,8 +93,8 @@ public class AvailabilityInfo {
 		
 		if(netAvail.contains("AVAILABLE")){
 			netAvType = "CNF";
-			index = netAvail.indexOf("AVAILABLE" + 9);
-			cnt = netAvail.substring(index);
+			index = netAvail.indexOf("AVAILABLE");
+			cnt = netAvail.substring(index+9);
 			if (cnt.contentEquals("")) {
 				netAvCount = 0;
 			}
