@@ -42,7 +42,10 @@ public class PendingQueryItems {
 		
 		HttpHost proxy = new HttpHost(proxyURL, proxyPort, proxyProtocol);
 		HttpClient httpclient = new DefaultHttpClient();
-		httpclient.getParams().setParameter(ConnRoutePNames.DEFAULT_PROXY, proxy);
+		
+		if(!proxyURL.contentEquals("")){
+			httpclient.getParams().setParameter(ConnRoutePNames.DEFAULT_PROXY,proxy);
+		}
 		
 		HttpPost httppost = new HttpPost(queryURL);
 		
@@ -72,17 +75,17 @@ public class PendingQueryItems {
 		
 		JSONArray pendingQueryItems = new JSONArray(builder.toString());
 		
-		for(int i=0; i<= pendingQueryItems.length(); i++){
+		for(int i=0; i< pendingQueryItems.length(); i++){
 			
 			JSONObject qi = pendingQueryItems.getJSONObject(i);
 			
 			QueryItem queryItem = new QueryItem();
 			
-			queryItem.setTrainNo(qi.getString("train_no"));
-			queryItem.setjClass(qi.getString("j_class"));
-			queryItem.setTrainNo(qi.getString("travel_date"));
-			queryItem.setSourceCode(qi.getString("source_code"));
-			queryItem.setDestinationCode(qi.getString("dest_code"));
+			queryItem.setTrainNo(qi.getString("TrainNo"));
+			queryItem.setjClass(qi.getString("Class"));
+			queryItem.setTravelDate(qi.getString("TravelDate"));
+			queryItem.setSourceCode(qi.getString("SourceCode"));
+			queryItem.setDestinationCode(qi.getString("DestinationCode"));
 			
 			list.add(queryItem);
 			

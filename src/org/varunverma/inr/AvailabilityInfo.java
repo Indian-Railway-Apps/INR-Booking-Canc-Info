@@ -29,16 +29,28 @@ public class AvailabilityInfo {
 		String cnt = "0";
 		int index;
 		
-		avail = Availability.replaceAll(" ", "");
-		String[] availability = avail.split("/");
+		String grossAvail = "";
+		String netAvail = "";
 		
-		String grossAvail = availability[0];
-		String netAvail = availability[1];
+		avail = Availability.replaceAll(" ", "");
+		
+		if(avail.contains("/")){
+			String[] availability = avail.split("/");
+			
+			if(availability.length == 2){
+				grossAvail = availability[0];
+				netAvail = availability[1];
+			}
+		}
+		else{
+			grossAvail = avail;
+			netAvail = avail;
+		}
 		
 		if(grossAvail.contains("WL")){
 			grossAvType = "WL";
 			index = grossAvail.indexOf("WL");
-			cnt = grossAvail.substring(index);
+			cnt = grossAvail.substring(index + 2);
 			if (cnt.contentEquals("")) {
 				grossAvCount = 999;
 			} else {
@@ -53,14 +65,14 @@ public class AvailabilityInfo {
 		if(grossAvail.contains("RAC")){
 			grossAvType = "RAC";
 			index = grossAvail.indexOf("RAC");
-			cnt = grossAvail.substring(index);
+			cnt = grossAvail.substring(index + 3);
 			grossAvCount = Integer.valueOf(cnt);
 		}
 		
 		if(grossAvail.contains("AVAILABLE")){
 			grossAvType = "CNF";
 			index = grossAvail.indexOf("AVAILABLE");
-			cnt = grossAvail.substring(index);
+			cnt = grossAvail.substring(index + 9);
 			grossAvCount = Integer.valueOf(cnt);
 		}
 		
@@ -68,20 +80,20 @@ public class AvailabilityInfo {
 		if (netAvail.contains("WL")) {
 			netAvType = "WL";
 			index = netAvail.indexOf("WL");
-			cnt = netAvail.substring(index);
+			cnt = netAvail.substring(index + 2);
 			netAvCount = Integer.valueOf(cnt);
 		}
 		
 		if (netAvail.contains("RAC")) {
 			netAvType = "RAC";
 			index = netAvail.indexOf("RAC");
-			cnt = netAvail.substring(index);
+			cnt = netAvail.substring(index + 3);
 			netAvCount = Integer.valueOf(cnt);
 		}
 		
 		if(netAvail.contains("AVAILABLE")){
 			netAvType = "CNF";
-			index = netAvail.indexOf("AVAILABLE");
+			index = netAvail.indexOf("AVAILABLE" + 9);
 			cnt = netAvail.substring(index);
 			if (cnt.contentEquals("")) {
 				netAvCount = 0;
@@ -102,12 +114,11 @@ public class AvailabilityInfo {
 		json.put("JourneyDate", JourneyDate);
 		json.put("JClass", Class);
 		json.put("LookupDate", LookupDate);
-		json.put("FromStations", fromStation);
-		json.put("ToStation", toStation);
 		json.put("GrossAvType", grossAvType);
 		json.put("GrossAvCount", grossAvCount);
 		json.put("NetAvType", netAvType);
 		json.put("NetAvCount", netAvCount);
+		json.put("Availability", Availability);
 		
 		return json;
 		

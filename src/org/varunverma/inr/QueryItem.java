@@ -24,6 +24,7 @@ import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.conn.params.ConnRoutePNames;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
@@ -35,7 +36,12 @@ public class QueryItem {
 
 	private String trainNo, travelDate, jClass, sourceCode, destinationCode;
 	private List<AvailabilityInfo> availInfo;
-
+	
+	public QueryItem(){
+		trainNo = travelDate = jClass = sourceCode = destinationCode = "";
+		availInfo = new ArrayList<AvailabilityInfo>();
+	}
+	
 	public String getTrainNo() {
 		return trainNo;
 	}
@@ -93,14 +99,41 @@ public class QueryItem {
 
 		HttpHost proxy = new HttpHost(proxyURL, proxyPort, proxyProtocol);
 		HttpClient httpclient = new DefaultHttpClient();
-		httpclient.getParams().setParameter(ConnRoutePNames.DEFAULT_PROXY,proxy);
-
+		
+		if(!proxyURL.contentEquals("")){
+			httpclient.getParams().setParameter(ConnRoutePNames.DEFAULT_PROXY,proxy);
+		}
+		
 		HttpPost httppost = new HttpPost("http://www.indianrail.gov.in/cgi_bin/inet_accavl_cgi.cgi");
 
 		List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
-
-		httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
-
+		
+		String[] date = travelDate.split("-");
+		String day = date[2];
+		String month = date[1];
+		String year = date[0];
+		
+		nameValuePairs.add(new BasicNameValuePair("lccp_trnno", trainNo));
+    	nameValuePairs.add(new BasicNameValuePair("lccp_day", day));
+    	nameValuePairs.add(new BasicNameValuePair("lccp_month", month));
+    	nameValuePairs.add(new BasicNameValuePair("lccp_year", year));
+    	nameValuePairs.add(new BasicNameValuePair("lccp_srccode", sourceCode));
+    	nameValuePairs.add(new BasicNameValuePair("lccp_dstncode", destinationCode));
+    	nameValuePairs.add(new BasicNameValuePair("lccp_class1", jClass));
+    	nameValuePairs.add(new BasicNameValuePair("lccp_quota", "GN"));
+    	nameValuePairs.add(new BasicNameValuePair("submit", "Get Availability"));
+    	
+    	nameValuePairs.add(new BasicNameValuePair("lccp_classopt", "ZZ"));
+    	nameValuePairs.add(new BasicNameValuePair("lccp_class2", "ZZ"));
+    	nameValuePairs.add(new BasicNameValuePair("lccp_class3", "ZZ"));
+    	nameValuePairs.add(new BasicNameValuePair("lccp_class4", "ZZ"));
+    	nameValuePairs.add(new BasicNameValuePair("lccp_class5", "ZZ"));
+    	nameValuePairs.add(new BasicNameValuePair("lccp_class6", "ZZ"));
+    	nameValuePairs.add(new BasicNameValuePair("lccp_class7", "ZZ"));
+    	
+    	httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+		httppost.addHeader("Referer", "http://www.indianrail.gov.in/seat_Avail.html");
+		
 		// Execute HTTP Post Request
 		HttpResponse response = httpclient.execute(httppost);
 

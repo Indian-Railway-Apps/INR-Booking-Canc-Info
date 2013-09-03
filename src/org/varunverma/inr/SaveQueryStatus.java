@@ -52,7 +52,10 @@ public class SaveQueryStatus {
 
 		HttpHost proxy = new HttpHost(proxyURL, proxyPort, proxyProtocol);
 		HttpClient httpclient = new DefaultHttpClient();
-		httpclient.getParams().setParameter(ConnRoutePNames.DEFAULT_PROXY,proxy);
+		
+		if(!proxyURL.contentEquals("")){
+			httpclient.getParams().setParameter(ConnRoutePNames.DEFAULT_PROXY,proxy);
+		}
 		
 		HttpPost httppost = new HttpPost(saveURL);
 		
@@ -81,6 +84,12 @@ public class SaveQueryStatus {
 			builder.append(line);
 		}
 		
+		if(builder.toString().contentEquals("Success")){
+			// Success
+		}
+		else{
+			// Failure
+		}
 		
 	}
 	
