@@ -17,7 +17,16 @@ public class Main {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-
+		
+		String mode = "Full";
+		
+		if(args.length == 0){
+			mode = "Full";
+		}
+		else if(args[0].contentEquals("Correction")){
+			mode = "Correction";
+		}
+		
 		// Create Application Instance
 		Application app = Application.getInstance();
 		
@@ -27,7 +36,7 @@ public class Main {
 			app.initializeApplication();
 			
 			// Get Pending Queries
-			List<QueryItem> pendingList = new PendingQueryItems().getPendingQueryItems();
+			List<QueryItem> pendingList = new PendingQueryItems().getPendingQueryItems(mode);
 			
 			// Loop and Query the status
 			Iterator<QueryItem> i = pendingList.iterator();

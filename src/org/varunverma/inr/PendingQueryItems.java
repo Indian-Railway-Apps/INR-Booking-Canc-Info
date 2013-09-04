@@ -19,6 +19,7 @@ import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.conn.params.ConnRoutePNames;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -29,7 +30,7 @@ import org.json.JSONObject;
 public class PendingQueryItems {
 
 	
-	public List<QueryItem> getPendingQueryItems() throws ClientProtocolException, IOException{
+	public List<QueryItem> getPendingQueryItems(String mode) throws ClientProtocolException, IOException{
 		
 		List<QueryItem> list = new ArrayList<QueryItem>();
 		
@@ -50,6 +51,8 @@ public class PendingQueryItems {
 		HttpPost httppost = new HttpPost(queryURL);
 		
 		List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
+		
+		nameValuePairs.add(new BasicNameValuePair("input", mode));
 		
 		httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 		
