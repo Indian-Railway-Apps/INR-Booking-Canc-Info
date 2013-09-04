@@ -4,7 +4,7 @@ import org.json.JSONObject;
 
 public class AvailabilityInfo {
 	
-	public String TrainNo, JourneyDate, Class, LookupDate, LookupTime, fromStation, toStation;
+	public String TrainNo, JourneyDate, Class, LookupTimeStamp, fromStation, toStation;
 	public String Availability, grossAvType, netAvType;
 	public int grossAvCount, netAvCount; 
 
@@ -15,8 +15,7 @@ public class AvailabilityInfo {
 		ai.TrainNo = TrainNo;
 		ai.JourneyDate = JourneyDate;
 		ai.Class = Class;
-		ai.LookupDate = LookupDate;
-		ai.LookupTime = LookupTime;
+		ai.LookupTimeStamp = LookupTimeStamp;
 		ai.fromStation = fromStation;
 		ai.toStation = toStation;
 		
@@ -113,7 +112,7 @@ public class AvailabilityInfo {
 		json.put("TrainNo", TrainNo);
 		json.put("JourneyDate", JourneyDate);
 		json.put("JClass", Class);
-		json.put("LookupDate", LookupDate);
+		json.put("LookupTimeStamp", LookupTimeStamp);
 		json.put("GrossAvType", grossAvType);
 		json.put("GrossAvCount", grossAvCount);
 		json.put("NetAvType", netAvType);

@@ -7,10 +7,6 @@ import java.io.IOException;
 import java.util.Iterator;
 import java.util.List;
 
-import javax.xml.parsers.ParserConfigurationException;
-
-import org.xml.sax.SAXException;
-
 /**
  * @author varun
  *
@@ -38,8 +34,16 @@ public class Main {
 			
 			while(i.hasNext()){
 				
-				// Query the Status
-				i.next().queryStatus();
+				try{
+					
+					// Query the Status
+					i.next().queryStatus();
+					
+				} catch(Exception e){
+					
+					System.out.println(e.getMessage());
+					e.printStackTrace();
+				}
 				
 			}
 			
@@ -52,12 +56,7 @@ public class Main {
 			System.out.println(e.getMessage());
 			e.printStackTrace();
 			
-		} catch (ParserConfigurationException e) {
-			
-			System.out.println(e.getMessage());
-			e.printStackTrace();
-
-		} catch (SAXException e) {
+		} catch (Exception e) {
 
 			System.out.println(e.getMessage());
 			e.printStackTrace();

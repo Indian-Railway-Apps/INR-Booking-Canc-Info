@@ -39,11 +39,9 @@ public class ParseTrainAvailability extends DefaultHandler {
 				ai1.TrainNo = trainNo;
 				ai1.fromStation = from;
 				ai1.toStation = to;
-				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.US);
-				ai1.LookupDate = sdf.format(new Date());
-				String[] d = ai1.LookupDate.split(" ");
-				ai1.LookupDate = d[0];
-				ai1.LookupTime = d[1];
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.US);
+				ai1.LookupTimeStamp = sdf.format(new Date());
+
 			}
 			
 			row++;
