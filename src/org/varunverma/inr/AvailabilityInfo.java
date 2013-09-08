@@ -51,7 +51,7 @@ public class AvailabilityInfo {
 			index = grossAvail.indexOf("WL");
 			cnt = grossAvail.substring(index + 2);
 			if (cnt.contentEquals("")) {
-				grossAvCount = 999;
+				grossAvCount = 0;
 			} else {
 				if (cnt.contentEquals("")) {
 					grossAvCount = 0;
@@ -75,6 +75,10 @@ public class AvailabilityInfo {
 			grossAvCount = Integer.valueOf(cnt);
 		}
 		
+		if(grossAvail.contains("REGRET")){
+			grossAvType = "REG";
+			grossAvCount = 0;
+		}
 		
 		if (netAvail.contains("WL")) {
 			netAvType = "WL";
