@@ -32,6 +32,8 @@ public class PendingQueryItems {
 	
 	public List<QueryItem> getPendingQueryItems(String mode) throws ClientProtocolException, IOException{
 		
+		System.out.println("Fetching pending queries");
+		
 		List<QueryItem> list = new ArrayList<QueryItem>();
 		
 		Application app = Application.getInstance();

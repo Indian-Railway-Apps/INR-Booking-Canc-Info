@@ -90,6 +90,7 @@ public class QueryItem {
 			ParserConfigurationException, SAXException {
 
 		// Query the Status
+		System.out.println("Quering Status for: " + trainNo + "/" + travelDate + "/" + jClass);
 
 		Application app = Application.getInstance();
 

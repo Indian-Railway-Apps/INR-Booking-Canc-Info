@@ -22,9 +22,11 @@ public class Main {
 		
 		if(args.length == 0){
 			mode = "Full";
+			System.out.println("Starting app in full mode");
 		}
 		else if(args[0].contentEquals("Correction")){
 			mode = "Correction";
+			System.out.println("Starting app in correction mode");
 		}
 		
 		// Create Application Instance
@@ -50,6 +52,7 @@ public class Main {
 					
 				} catch(Exception e){
 					
+					System.out.println("Error while Quering Status");
 					System.out.println(e.getMessage());
 					e.printStackTrace();
 				}

@@ -31,6 +31,8 @@ public class SaveQueryStatus {
 
 	public void saveStatus(List<QueryItem> queryItems) throws ClientProtocolException, IOException{
 		
+		System.out.println("Posting the avail status");
+		
 		JSONArray availInfo = new JSONArray();
 		
 		Iterator<QueryItem> i = queryItems.iterator();
@@ -88,11 +90,13 @@ public class SaveQueryStatus {
 			builder.append(line);
 		}
 		
-		if(builder.toString().contentEquals("Success")){
+		if(builder.toString().contains("Success")){
 			// Success
+			System.out.println("Post success");
 		}
 		else{
 			// Failure
+			System.out.println("Post failed");
 		}
 		
 	}
