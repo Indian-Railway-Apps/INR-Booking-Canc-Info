@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.TimeZone;
 
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
@@ -39,8 +40,10 @@ public class ParseTrainAvailability extends DefaultHandler {
 				ai1.TrainNo = trainNo;
 				ai1.fromStation = from;
 				ai1.toStation = to;
+				Date date = new Date();
 				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.US);
-				ai1.LookupTimeStamp = sdf.format(new Date());
+				sdf.setTimeZone(TimeZone.getTimeZone("IST"));
+				ai1.LookupTimeStamp = sdf.format(date);
 
 			}
 			
