@@ -57,6 +57,12 @@ public class Main {
 					e.printStackTrace();
 				}
 				
+				// Sleep for some time.
+				try {
+					Thread.sleep(10 * 1000);
+				} catch (InterruptedException e) {
+				}
+				
 			}
 			
 			// Save the Status
@@ -73,6 +79,8 @@ public class Main {
 			System.out.println(e.getMessage());
 			e.printStackTrace();
 		}
+		
+		System.out.println("Process completed");
 		
 	}
 
